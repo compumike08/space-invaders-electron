@@ -26,11 +26,12 @@ const config: ForgeConfig = {
     new AutoUnpackNativesPlugin({}),
     new WebpackPlugin({
       mainConfig,
+      devContentSecurityPolicy: "default-src 'self' 'unsafe-inline' data: blob:; script-src 'self' 'unsafe-eval' 'unsafe-inline' data:",
       renderer: {
         config: rendererConfig,
         entryPoints: [
           {
-            html: './src/index.html',
+            html: './src/phaser/index.html',
             js: './src/renderer.ts',
             name: 'main_window',
             preload: {

@@ -4,5 +4,11 @@ body {
     sans-serif;
   margin: auto;
   max-width: 38rem;
-  padding: 2rem;
+  padding: 1rem;
+}
+
+#app {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

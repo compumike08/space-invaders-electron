@@ -27,7 +27,10 @@
  */
 
 import './index.css';
+import StartGame from './phaser/game/main';
 
-console.log(
-  '👋 This message is being logged by "renderer.js", included via webpack',
-);
+document.addEventListener('DOMContentLoaded', () => {
+
+    StartGame('game-container');
+
+});

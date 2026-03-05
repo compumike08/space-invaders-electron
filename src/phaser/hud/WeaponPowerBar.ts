@@ -15,7 +15,7 @@ export class WeaponPowerBar {
         this.bar = new Phaser.GameObjects.Graphics(scene);
         this.bar.setDepth(5);
         
-        this.x = x + 70;
+        this.x = x;
         this.y = y + 3;
         this.value = power;
         this.weaponFireCooldown = scene.currentDiffLevel.weaponFireCooldown;
@@ -29,7 +29,7 @@ export class WeaponPowerBar {
         scene.add.existing(this.bar);
         this.draw(this.x, this.y);
 
-        this.weaponStatusBarText = this.bar.scene.add.text(this.x - 115, this.y - 3, 'Weapon Power: ', {
+        this.weaponStatusBarText = this.bar.scene.add.text(this.x, this.y - 3, 'Weapon Power: ', {
             fontFamily: 'Arial Black', fontSize: 12, color: '#ffffff',
             stroke: '#000000', strokeThickness: 3,
             align: 'center'
@@ -46,7 +46,7 @@ export class WeaponPowerBar {
             this.value = amount;
         }
 
-        this.draw(this.x, this.y);
+        this.draw(this.x + 115, this.y);
     }
 
     draw(x: number, y: number) {

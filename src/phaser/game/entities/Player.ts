@@ -37,10 +37,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
         this.weaponPower = this.weaponFireCooldown;
 
-        this.livesText = new LivesText(this.scene, 5, 5, scene.currentDiffLevel.lives);
-        this.weaponPowerBar = new WeaponPowerBar(scene, scene.gameWidth - 160, 5, this.weaponPower);
-
-        this.scoreText = new ScoreText(this.scene, 5, 30, 0);
+        this.weaponPowerBar = new WeaponPowerBar(scene, 5, 5, this.weaponPower);
+        this.livesText = new LivesText(this.scene, 5, 25, scene.currentDiffLevel.lives);
+        this.scoreText = new ScoreText(this.scene, 5, 45, 0);
 
         this.isGameRunning = true;
 

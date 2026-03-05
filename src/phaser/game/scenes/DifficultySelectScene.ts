@@ -1,4 +1,3 @@
-import { GameObjects } from 'phaser';
 import { BaseScene } from './BaseScene';
 import { Menu } from './Menu';
 
@@ -6,8 +5,6 @@ export const DIFFICULTY_SELECTED_KEY = "DIFFICULTY_SELECTED_KEY";
 
 export class DifficultySelectScene extends BaseScene
 {
-    easyOption: GameObjects.Text;
-
     fontSize: number;
     lineHeight: number;
     fontOptions: {

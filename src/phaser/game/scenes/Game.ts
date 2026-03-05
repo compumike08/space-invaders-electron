@@ -1,8 +1,8 @@
 import { SpriteWithDynamicBody } from '../../global';
+import { DIFFICULTY_SELECTED_KEY, FINAL_SCORE_KEY } from '../constants/constants';
 import { Player } from '../entities/Player';
 import { Ufo } from '../entities/Ufo';
 import { BaseScene } from './BaseScene';
-import { DIFFICULTY_SELECTED_KEY } from './DifficultySelectScene';
 
 const WEAPON_PULSE_SPEED = 10;
 const UFO_MAX_INIT_Y = 1000;
@@ -82,6 +82,9 @@ export class Game extends BaseScene
         this.ufoGroup.getChildren().forEach((ufo: Ufo) => {
             ufo.anims.pause();
         });
+
+        const score = this.player.scoreText.score;
+        localStorage.setItem(FINAL_SCORE_KEY, score.toString());
 
         this.scene.start("GameOver");
     }

@@ -1,7 +1,6 @@
+import { DIFFICULTY_SELECTED_KEY } from '../constants/constants';
 import { BaseScene } from './BaseScene';
 import { Menu } from './Menu';
-
-export const DIFFICULTY_SELECTED_KEY = "DIFFICULTY_SELECTED_KEY";
 
 export class DifficultySelectScene extends BaseScene
 {

@@ -1,3 +1,4 @@
+import { QuitButton } from '../../hud/QuitButton';
 import { SpriteWithDynamicBody } from '../../global';
 import { FINAL_SCORE_KEY } from '../constants/constants';
 import { Player } from '../entities/Player';
@@ -16,6 +17,7 @@ export class Game extends BaseScene
     ufoGroup: Phaser.Physics.Arcade.Group;
     cursors: Phaser.Types.Input.Keyboard.CursorKeys;
     isGameRunning: boolean;
+    quitButton: QuitButton;
 
     constructor ()
     {
@@ -39,6 +41,8 @@ export class Game extends BaseScene
         }
 
         this.currentDiffLevel = diffLevel;
+
+        this.quitButton = new QuitButton(this, this.gameWidth - 5, 0, this.handleQuitClicked.bind(this));
     }
 
     create ()
@@ -71,6 +75,10 @@ export class Game extends BaseScene
                 this.player.decreaseLives(MINUS_LIVES);
             }
         });
+    }
+
+    handleQuitClicked() {
+        this.gameOverCallback();
     }
 
     createPlayer() {

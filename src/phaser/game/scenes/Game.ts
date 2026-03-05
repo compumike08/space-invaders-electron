@@ -1,4 +1,5 @@
 import { SpriteWithDynamicBody } from '../../global';
+import { FINAL_SCORE_KEY } from '../constants/constants';
 import { Player } from '../entities/Player';
 import { Ufo } from '../entities/Ufo';
 import { BaseScene } from './BaseScene';
@@ -82,6 +83,8 @@ export class Game extends BaseScene
         this.ufoGroup.getChildren().forEach((ufo: Ufo) => {
             ufo.anims.pause();
         });
+
+        localStorage.setItem(FINAL_SCORE_KEY, this.player.scoreText.score.toString());
 
         this.scene.start("GameOver");
     }

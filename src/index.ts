@@ -9,31 +9,6 @@ if (require('electron-squirrel-startup')) {
   app.quit();
 }
 
-// protocol.registerSchemesAsPrivileged([
-//   {
-//     scheme: 'http',
-//     privileges: {
-//       standard: true,
-//       bypassCSP: true, // This is the key
-//       allowServiceWorkers: true,
-//       supportFetchAPI: true,
-//       corsEnabled: true,
-//       stream: true
-//     }
-//   },
-//   {
-//     scheme: 'https',
-//     privileges: {
-//       standard: true,
-//       bypassCSP: true, // This is the key
-//       allowServiceWorkers: true,
-//       supportFetchAPI: true,
-//       corsEnabled: true,
-//       stream: true
-//     }
-//   },
-// ]);
-
 const createWindow = (): void => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({

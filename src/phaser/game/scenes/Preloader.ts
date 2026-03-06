@@ -20,6 +20,11 @@ export class Preloader extends BaseScene
         this.load.image('ship', 'main_ship.png');
 
         this.load.image('weapon-pulse', 'weapon_pulse.png');
+
+        this.load.spritesheet('explosion', 'explosion.png', {
+            frameWidth: 32,
+            frameHeight: 32
+        });
     }
 
     create ()

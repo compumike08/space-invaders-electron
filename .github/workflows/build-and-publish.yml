@@ -1,0 +1,48 @@
+name: Electron Forge Build and Publish
+
+on:
+  release:
+    types: [published] # Triggers the workflow when a new GitHub release is published
+  # Alternatively, trigger on push to main/master branch for build artifacts only
+  # push:
+  #   branches:
+  #     - main
+
+jobs:
+  build-and-publish:
+    runs-on: ${{ matrix.os }} # Run on multiple OS using a matrix
+    permissions:
+        contents: write
+    
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest] # Build for all major platforms
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      # If you only want to build/make artifacts and upload them as workflow artifacts:
+      # - name: Electron Forge Make
+      #   run: npm run make
+
+      # If you want to build *and* publish to GitHub Releases (requires publisher config from step 1):
+      - name: Electron Forge Publish
+        # The GITHUB_TOKEN secret is automatically provided by GitHub Actions
+        run: npm run publish 
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-app-dist-${{ matrix.os }}
+          path: out/ # Forge outputs distributables to the 'out' directory

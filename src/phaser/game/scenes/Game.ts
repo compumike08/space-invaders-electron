@@ -81,7 +81,14 @@ export class Game extends BaseScene
     }
 
     createPlayer() {
-        this.player = new Player(this, this.gameWidth / 2, this.gameHeight - 20, this.weaponPulses, this.gameOverCallback.bind(this), this.fireNovaBlastCallback.bind(this));
+        this.player = new Player(
+            this,
+            this.gameWidth / 2,
+            this.gameHeight - 20,
+            this.weaponPulses,
+            this.gameOverCallback.bind(this),
+            this.fireNovaBlastCallback.bind(this)
+        );
     }
 
     fireNovaBlastCallback() {

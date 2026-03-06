@@ -23,7 +23,14 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     specialFireCooldown: number;
     specialPower: number;
 
-    constructor(scene: BaseScene, x: number, y: number, weaponPulses: Phaser.Physics.Arcade.Group, gameOverCallback: Function, fireNovaBlastCallback: Function) {
+    constructor(
+        scene: BaseScene,
+        x: number,
+        y: number,
+        weaponPulses: Phaser.Physics.Arcade.Group,
+        gameOverCallback: Function,
+        fireNovaBlastCallback: Function
+    ) {
         super(scene, x, y, 'ship');
 
         scene.add.existing(this);
@@ -38,7 +45,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.init(scene);
         
         this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
-        this.scene.input.keyboard.on('keydown-S', this.fireSpecial.bind(this));
+        this.scene.input.keyboard.on('keydown-N', this.fireNovaBlast.bind(this));
     }
 
     init(scene: BaseScene) {
@@ -63,7 +70,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             .setCollideWorldBounds(true);
     }
 
-    fireSpecial() {
+    fireNovaBlast() {
         if (this.specialFireTime >= this.specialFireCooldown) {
             this.specialPower = 0;
             this.specialFireTime = 0;

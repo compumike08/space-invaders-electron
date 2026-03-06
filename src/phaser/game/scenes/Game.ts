@@ -81,7 +81,16 @@ export class Game extends BaseScene
     }
 
     createPlayer() {
-        this.player = new Player(this, this.gameWidth / 2, this.gameHeight - 20, this.weaponPulses, this.gameOverCallback.bind(this));
+        this.player = new Player(this, this.gameWidth / 2, this.gameHeight - 20, this.weaponPulses, this.gameOverCallback.bind(this), this.fireNovaBlastCallback.bind(this));
+    }
+
+    fireNovaBlastCallback() {
+        this.ufoGroup.getChildren().forEach((ufo: Ufo) => {
+            if (ufo.getBounds().bottom > 0) {
+                ufo.explodeUfo();
+                this.player.increaseScore(this.currentDiffLevel.scoreAmt);
+            }
+        });
     }
 
     gameOverCallback() {

@@ -3,5 +3,6 @@ export interface DifficultyLevel {
     ufoSpeed: number;
     scoreAmt: number;
     weaponFireCooldown: number;
+    specialFireCooldown: number;
     lives: number;
 }

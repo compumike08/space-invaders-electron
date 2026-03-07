@@ -18,6 +18,15 @@ Once you start the application, click "Play", then select a difficulty level. Th
 ### Weapon Power Bar
 In the upper left corner of the screen there is a bar labeled "Weapon Power". When the bar is full and green, you can fire your weapon. Firing deletes the power to zero, which drains the bar. There is a brief recharge time, during which the bar will be red, and start filling back up. Once the bar is full it turns green again, and you can fire again.
 
+### Special Power Bar
+In the upper left corner of the screen there is a bar labeled "Special Power". When the bar is full and green, you can use a special ability (see [Special Abilities](#special-abilities) below).
+
+### Special Abilities
+Currently, there is only one special ability available.
+
+#### Nova Blast
+By pressing the `n` key on the keyboard when the special power bar is full, you can activate the Nova Blast ability. When activated, Nova Blast will instantly destory all Ufos that are currently on the screen.
+
 ### Lives
 Each ufo that reaches the bottom of the screen without being shot down reduces your lives by 1. Your remaining lives are shown at the upper left corner of the screen.
 

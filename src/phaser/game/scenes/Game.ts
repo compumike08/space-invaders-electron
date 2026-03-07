@@ -2,12 +2,11 @@ import { QuitButton } from '../../hud/QuitButton';
 import { SpriteWithDynamicBody } from '../../global';
 import { FINAL_SCORE_KEY } from '../constants/constants';
 import { Player } from '../entities/Player';
-import { Ufo } from '../entities/Ufo';
+import { Ufo, UFO_MAX_INIT_Y } from '../entities/Ufo';
 import { BaseScene } from './BaseScene';
 import { DIFFICULTY_SELECTED_KEY } from './DifficultySelectScene';
 
 const WEAPON_PULSE_SPEED = 10;
-const UFO_MAX_INIT_Y = 1000;
 const MINUS_LIVES = 1;
 
 export class Game extends BaseScene
@@ -61,7 +60,7 @@ export class Game extends BaseScene
 
         Phaser.Actions.IncY(this.weaponPulses.getChildren(), -WEAPON_PULSE_SPEED);
 
-        Phaser.Actions.IncY(this.ufoGroup.getChildren(), this.currentDiffLevel.ufoSpeed);
+        Phaser.Actions.IncY(this.ufoGroup.getChildren().filter((ufo: Ufo) => !ufo.isExploding), this.currentDiffLevel.ufoSpeed);
         
         this.weaponPulses.getChildren().forEach((weaponPulse: SpriteWithDynamicBody) => {
             if (weaponPulse.getBounds().y <= -26) {
@@ -71,7 +70,7 @@ export class Game extends BaseScene
 
         this.ufoGroup.getChildren().forEach((ufo: Ufo) => {
             if (ufo.getBounds().bottom >= this.gameHeight) {
-                this.recycleUfo(ufo);
+                ufo.recycleUfo();
                 this.player.decreaseLives(MINUS_LIVES);
             }
         });
@@ -82,7 +81,23 @@ export class Game extends BaseScene
     }
 
     createPlayer() {
-        this.player = new Player(this, this.gameWidth / 2, this.gameHeight - 20, this.weaponPulses, this.gameOverCallback.bind(this));
+        this.player = new Player(
+            this,
+            this.gameWidth / 2,
+            this.gameHeight - 20,
+            this.weaponPulses,
+            this.gameOverCallback.bind(this),
+            this.fireNovaBlastCallback.bind(this)
+        );
+    }
+
+    fireNovaBlastCallback() {
+        this.ufoGroup.getChildren().forEach((ufo: Ufo) => {
+            if (ufo.getBounds().bottom > 0) {
+                ufo.explodeUfo();
+                this.player.increaseScore(this.currentDiffLevel.scoreAmt);
+            }
+        });
     }
 
     gameOverCallback() {
@@ -110,13 +125,12 @@ export class Game extends BaseScene
     }
 
     detectCollision(weaponPulse: SpriteWithDynamicBody, ufo: Ufo) {
-        weaponPulse.destroy(true);
-        this.recycleUfo(ufo);
-        this.player.increaseScore(this.currentDiffLevel.scoreAmt);
-    }
+        if (ufo.isExploding) {
+            return;
+        }
 
-    recycleUfo(ufo: Ufo) {
-        const randomY = Phaser.Math.Between(0, UFO_MAX_INIT_Y);
-        ufo.y = -randomY;
+        weaponPulse.destroy(true);
+        ufo.explodeUfo();
+        this.player.increaseScore(this.currentDiffLevel.scoreAmt);
     }
 }

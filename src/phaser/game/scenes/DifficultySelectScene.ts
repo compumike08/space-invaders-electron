@@ -11,7 +11,6 @@ export class DifficultySelectScene extends BaseScene
         fontSize: string;
         fill: string;
     }
-    menu: Array<Menu>;
 
     constructor ()
     {
@@ -30,18 +29,12 @@ export class DifficultySelectScene extends BaseScene
             return {
                 text: level.levelName
             };
-        }), (menuItem: Menu) => this.setupMenuEvents(menuItem));
-    }
-
-    createMenu(menu: Array<Menu>, setupMenuEvents: Function) {
-        let lastMenuPositionY = 0;
-
-        menu.forEach(menuItem => {
-            const menuPosition = [this.gameWidth / 2, this.gameHeight / 2 + lastMenuPositionY];
-            menuItem.textGO = this.add.text(menuPosition[0], menuPosition[1], menuItem.text, this.fontOptions)
-                .setOrigin(0.5, 1);
-            lastMenuPositionY += this.lineHeight;
-            setupMenuEvents(menuItem);
+        }),
+        (menuItem: Menu) => this.setupMenuEvents(menuItem),
+        {
+          fontSize: this.fontSize,
+          lineHeight: this.lineHeight,
+          fontOptions: this.fontOptions
         });
     }
 

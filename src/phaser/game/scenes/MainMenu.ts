@@ -1,25 +1,69 @@
-import { GameObjects } from 'phaser';
 import { BaseScene } from './BaseScene';
+import { Menu } from './Menu';
 
 export class MainMenu extends BaseScene
 {
-    title: GameObjects.Text;
+    menu: Array<Menu>;
+    fontSize: number;
+    lineHeight: number;
+    fontOptions: {
+        fontSize: string;
+        fill: string;
+    }
 
     constructor ()
     {
         super('MainMenu');
+
+        this.fontSize = 32;
+        this.lineHeight = 42;
+        this.fontOptions = {
+            fontSize: `${this.fontSize}px`,
+            fill: '#fff'
+        };
+
+        this.menu = [
+            {
+                scene: 'DifficultySelectScene',
+                text: 'Play'
+            },
+            {
+                scene: 'InstructionsControlsScene',
+                text: 'Instructions/Controls'
+            }
+        ];
     }
 
     create ()
     {
-        this.title = this.add.text(this.gameWidth / 2, this.gameHeight / 2, 'Play', {
-            fontFamily: 'Arial Black', fontSize: 38, color: '#000000',
-            stroke: '#FFFFFF', strokeThickness: 4,
-            align: 'center'
-        }).setInteractive().setOrigin(0.5);
+        this.createMenu(
+            this.menu,
+            (menuItem: Menu) => this.setupMenuEvents(menuItem),
+            {
+            fontSize: this.fontSize,
+            lineHeight: this.lineHeight,
+            fontOptions: this.fontOptions
+            });
+    }
 
-        this.title.on('pointerup', () => {
-            this.scene.start('DifficultySelectScene');
+    setupMenuEvents(menuItem: Menu) {
+        const textGO = menuItem.textGO;
+        textGO.setInteractive();
+
+        textGO.on('pointerover', () => {
+            textGO.setStyle({
+                fill: '#ff0'
+            });
+        });
+
+        textGO.on('pointerout', () => {
+            textGO.setStyle({
+                fill: '#fff'
+            });
+        });
+
+        textGO.on('pointerup', () => {
+            menuItem.scene && this.scene.start(menuItem.scene);
         });
     }
 }

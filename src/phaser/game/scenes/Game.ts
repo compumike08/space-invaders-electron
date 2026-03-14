@@ -67,7 +67,7 @@ export class Game extends BaseScene {
     Phaser.Actions.IncY(this.weaponPulses.getChildren(), -WEAPON_PULSE_SPEED);
 
     Phaser.Actions.IncY(
-      this.ufoGroup.getChildren().filter((ufo: Ufo) => !ufo.isExploding),
+      this.ufoGroup.getChildren().filter((ufo: Ufo) => ufo.isMoving()),
       this.currentDiffLevel.ufoSpeed
     );
 

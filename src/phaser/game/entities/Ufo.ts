@@ -40,6 +40,10 @@ export class Ufo extends Phaser.Physics.Arcade.Sprite {
 
   update() {}
 
+  isMoving() {
+    return !this.isExploding;
+  }
+
   explodeUfo() {
     this.isExploding = true;
     this.setScale(2, 2);

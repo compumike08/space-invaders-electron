@@ -5,5 +5,8 @@ on:
 jobs:
   delete-pr-cache:
     runs-on: ubuntu-latest
+    permissions:
+      actions: write
+
     steps:
       - uses: toshimaru/delete-action-cache@v1.0.1

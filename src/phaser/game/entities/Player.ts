@@ -5,6 +5,7 @@ import { WeaponPowerBar } from "../../hud/WeaponPowerBar";
 import { BaseScene } from "../scenes/BaseScene";
 
 const SHIP_VELOCITY = 300;
+const TIME_FREEZE_DURATION = 10000; // time in milliseconds
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
   cursors: Phaser.Types.Input.Keyboard.CursorKeys;
@@ -22,6 +23,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   weaponFireCooldown: number;
   specialFireCooldown: number;
   specialPower: number;
+  isTimeFrozen: boolean;
 
   constructor(
     scene: BaseScene,
@@ -46,9 +48,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
     this.scene.input.keyboard.on("keydown-N", this.fireNovaBlast.bind(this));
+    this.scene.input.keyboard.on("keydown-T", this.fireFreezeTime.bind(this));
   }
 
   init(scene: BaseScene) {
+    this.isTimeFrozen = false;
+
     this.cursors = (
       this.scene.input.keyboard as Phaser.Input.Keyboard.KeyboardPlugin
     ).createCursorKeys();
@@ -83,6 +88,29 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
+  fireFreezeTime() {
+    if (this.specialFireTime >= this.specialFireCooldown) {
+      this.specialPower = 0;
+      this.specialFireTime = 0;
+      this.specialPowerBar.setPower(this.specialPower);
+
+      this.isTimeFrozen = true;
+      this.scene.cameras.main.setBackgroundColor("rgba(255, 0, 0, 0.5)");
+
+      this.scene.time.delayedCall(
+        TIME_FREEZE_DURATION,
+        this.unfreezeTime,
+        null,
+        this
+      );
+    }
+  }
+
+  unfreezeTime() {
+    this.isTimeFrozen = false;
+    this.scene.cameras.main.setBackgroundColor("rgba(0, 0, 0, 1)");
+  }
+
   increaseScore(addToScore: number) {
     this.scoreText.increaseScore(addToScore);
   }
@@ -96,23 +124,34 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
+  increaseSpecialPower(delta: number) {
+    this.specialFireTime += delta;
+    this.specialPower =
+      this.specialFireTime > this.specialFireCooldown
+        ? this.specialFireCooldown
+        : this.specialFireTime;
+    this.specialPowerBar.setPower(this.specialPower);
+  }
+
+  increaseWeaponPower(delta: number) {
+    this.weaponFireTime += delta;
+    this.weaponPower =
+      this.weaponFireTime > this.weaponFireCooldown
+        ? this.weaponFireCooldown
+        : this.weaponFireTime;
+    this.weaponPowerBar.setPower(this.weaponPower);
+  }
+
   update(_time: number, delta: number) {
     if (!this.isGameRunning) {
       return;
     }
 
-    this.weaponFireTime += delta;
-    this.specialFireTime += delta;
-    this.weaponPower =
-      this.weaponFireTime > this.weaponFireCooldown
-        ? this.weaponFireCooldown
-        : this.weaponFireTime;
-    this.specialPower =
-      this.specialFireTime > this.specialFireCooldown
-        ? this.specialFireCooldown
-        : this.specialFireTime;
-    this.weaponPowerBar.setPower(this.weaponPower);
-    this.specialPowerBar.setPower(this.specialPower);
+    this.increaseWeaponPower(delta);
+
+    if (!this.isTimeFrozen) {
+      this.increaseSpecialPower(delta);
+    }
 
     const { left, right, space } = this.cursors;
 

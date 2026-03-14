@@ -18,6 +18,7 @@ Once you start the application, click "Play", then select a difficulty level. Th
 - Press the right arrow key to move your player ship to the right
 - Press the spacebar to fire your weapon upwards from your ship
 - Press the `n` key to trigger the [Nova Blast](#nova-blast) special ability
+- Press the `t` key to trigger the [Time Freeze](#time-freeze) special ability
 
 ### Weapon Power Bar
 
@@ -29,11 +30,15 @@ In the upper left corner of the screen there is a bar labeled "Special Power". W
 
 ### Special Abilities
 
-Currently, there is only one special ability available.
-
 #### Nova Blast
 
 By pressing the `n` key on the keyboard when the special power bar is full, you can activate the Nova Blast ability. When activated, Nova Blast will instantly destory all Ufos that are currently on the screen.
+
+#### Time Freeze
+
+By pressing the `t` key on the keyboard when the special power bar is full, you can activate the Time Freeze ability. When activated, all of the ufos on the screen will freeze. You can still move around and fire your weapon to destory the frozen ufos. Time will resume after about 10 seconds.
+
+_NOTE: While time is frozen, the weapon power bar will continue to recharge, but the special power bar will remain at zero until time resumes._
 
 ### Lives
 

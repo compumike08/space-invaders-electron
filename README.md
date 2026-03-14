@@ -58,4 +58,4 @@ This game is provided for free on an "as-is" basis. The maker of this game is no
 
 ## Copyright
 
-Copyright &copy; 2026 compumike08 - All Rights Reserved.
+Copyright &copy; 2026 compumike08 - See [LICENSE](LICENSE) file.

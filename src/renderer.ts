@@ -26,11 +26,9 @@
  * ```
  */
 
-import './index.css';
-import StartGame from './phaser/game/main';
+import "./index.css";
+import StartGame from "./phaser/game/main";
 
-document.addEventListener('DOMContentLoaded', () => {
-
-    StartGame('game-container');
-
+document.addEventListener("DOMContentLoaded", () => {
+  StartGame("game-container");
 });

@@ -12,7 +12,7 @@
     "publish": "electron-forge publish",
     "lint": "eslint --ext .ts,.tsx .",
     "postinstall": "husky",
-    "format": "prettier --write"
+    "format": "prettier . --write"
   },
   "keywords": [],
   "author": {

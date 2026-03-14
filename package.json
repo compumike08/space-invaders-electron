@@ -50,7 +50,8 @@
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.1",
-    "phaser": "^3.90.0"
+    "phaser": "^3.90.0",
+    "reselect": "^5.1.1"
   },
   "lint-staged": {
     "*.{js,json,css,md,ts,html,yml,yaml}": "prettier --write"

@@ -1,4 +1,4 @@
-name: Built and Lint
+name: Build and Lint
 
 on:
   pull_request:

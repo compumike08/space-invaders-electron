@@ -1,0 +1,25 @@
+name: Manually Cache Yarn Depenendencies
+
+on:
+  workflow_dispatch:
+
+jobs:
+  manually-cache-yarn-dependencies:
+    runs-on: ${{ matrix.os }} # Run on multiple OS using a matrix
+
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest] # Build for all major platforms
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile

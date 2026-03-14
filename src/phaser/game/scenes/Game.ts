@@ -1,5 +1,5 @@
 import { QuitButton } from "../../hud/QuitButton";
-import { SpriteWithDynamicBody } from "../../global";
+import type { SpriteWithDynamicBody } from "../../global";
 import { FINAL_SCORE_KEY } from "../constants/constants";
 import { Player } from "../entities/Player";
 import { Ufo, UFO_MAX_INIT_Y } from "../entities/Ufo";

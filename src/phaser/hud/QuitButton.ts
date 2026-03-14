@@ -5,7 +5,12 @@ export class QuitButton {
   y: number;
   quitButtonText: Phaser.GameObjects.Text;
 
-  constructor(scene: Scene, x: number, y: number, handleQuitClicked: Function) {
+  constructor(
+    scene: Scene,
+    x: number,
+    y: number,
+    handleQuitClicked: () => void
+  ) {
     this.x = x;
     this.y = y;
 

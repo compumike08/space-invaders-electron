@@ -1,5 +1,5 @@
 import { BaseScene } from "./BaseScene";
-import { Menu } from "./Menu";
+import type { Menu } from "./Menu";
 
 export class MainMenu extends BaseScene {
   menu: Array<Menu>;

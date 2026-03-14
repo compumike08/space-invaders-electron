@@ -1,4 +1,4 @@
-import { HudBarSize } from "./hud";
+import type { HudBarSize } from "./hud";
 import { BaseScene } from "../game/scenes/BaseScene";
 
 export class WeaponPowerBar {

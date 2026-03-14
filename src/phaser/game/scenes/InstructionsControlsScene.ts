@@ -1,5 +1,5 @@
 import { BaseScene } from "./BaseScene";
-import { FontConfig } from "./Menu";
+import type { FontConfig } from "./Menu";
 
 export class InstructionsControlsScene extends BaseScene {
   textContainer: Phaser.GameObjects.Container;

@@ -17,6 +17,7 @@ Once you start the application, click "Play", then select a difficulty level. Th
 - Press the left arrow key to move your player ship to the left
 - Press the right arrow key to move your player ship to the right
 - Press the spacebar to fire your weapon upwards from your ship
+- Press the `n` key to trigger the [Nova Blast](#nova-blast) special ability
 
 ### Weapon Power Bar
 

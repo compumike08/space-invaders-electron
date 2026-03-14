@@ -1,0 +1,30 @@
+name: Cache Yarn Depenendencies
+
+on:
+  push:
+    branches:
+      - "master"
+    paths:
+      - "package.json"
+      - "yarn.lock"
+
+jobs:
+  cache-yarn-dependencies:
+    runs-on: ${{ matrix.os }} # Run on multiple OS using a matrix
+
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest] # Build for all major platforms
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile

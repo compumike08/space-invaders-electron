@@ -16,8 +16,6 @@ export class Ufo extends Phaser.Physics.Arcade.Sprite {
     scene.physics.add.existing(this);
 
     this.init();
-
-    this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
   }
 
   init() {
@@ -37,8 +35,6 @@ export class Ufo extends Phaser.Physics.Arcade.Sprite {
     const randomY = Phaser.Math.Between(0, UFO_MAX_INIT_Y);
     this.y = -randomY;
   }
-
-  update() {}
 
   isMoving() {
     return !this.isExploding;

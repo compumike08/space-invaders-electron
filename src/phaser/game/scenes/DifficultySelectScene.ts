@@ -1,5 +1,5 @@
 import { BaseScene } from "./BaseScene";
-import { Menu } from "./Menu";
+import type { Menu } from "./Menu";
 
 export const DIFFICULTY_SELECTED_KEY = "DIFFICULTY_SELECTED_KEY";
 

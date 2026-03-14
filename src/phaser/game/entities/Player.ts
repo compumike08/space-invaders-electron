@@ -16,8 +16,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   weaponPulses: Phaser.Physics.Arcade.Group;
   weaponFireTime: number;
   specialFireTime: number;
-  gameOverCallback: Function;
-  fireNovaBlastCallback: Function;
+  gameOverCallback: () => void;
+  fireNovaBlastCallback: () => void;
   isGameRunning: boolean;
   scoreText: ScoreText;
   weaponFireCooldown: number;
@@ -30,8 +30,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     x: number,
     y: number,
     weaponPulses: Phaser.Physics.Arcade.Group,
-    gameOverCallback: Function,
-    fireNovaBlastCallback: Function
+    gameOverCallback: () => void,
+    fireNovaBlastCallback: () => void
   ) {
     super(scene, x, y, "ship");
 

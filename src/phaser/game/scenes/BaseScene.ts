@@ -1,6 +1,6 @@
 import { Scene } from "phaser";
-import { DifficultyLevel } from "../DifficultyLevel";
-import { FontConfig, Menu } from "./Menu";
+import type { DifficultyLevel } from "../DifficultyLevel";
+import type { FontConfig, Menu } from "./Menu";
 
 export class BaseScene extends Scene {
   difficultyLevels: Array<DifficultyLevel> = [
@@ -50,7 +50,7 @@ export class BaseScene extends Scene {
 
   createMenu(
     menu: Array<Menu>,
-    setupMenuEvents: Function,
+    setupMenuEvents: (menuItem: Menu) => void,
     fontConfig: FontConfig
   ) {
     let lastMenuPositionY = 0;

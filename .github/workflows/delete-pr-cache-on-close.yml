@@ -1,0 +1,9 @@
+name: Delete PR Action Cache On PR Close
+on:
+  pull_request_target:
+    types: [closed]
+jobs:
+  delete-pr-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: toshimaru/delete-action-cache@v1.0.1

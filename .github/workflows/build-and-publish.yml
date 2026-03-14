@@ -27,8 +27,12 @@ jobs:
         with:
           node-version: 20
 
+      - name: Setup Yarn
+        # Use a specific action for Yarn to handle potential symlink issues
+        run: npm install -g yarn
+
       - name: Install dependencies
-        run: npm install
+        run: yarn install
 
       # If you only want to build/make artifacts and upload them as workflow artifacts:
       # - name: Electron Forge Make
@@ -37,7 +41,7 @@ jobs:
       # If you want to build *and* publish to GitHub Releases (requires publisher config from step 1):
       - name: Electron Forge Publish
         # The GITHUB_TOKEN secret is automatically provided by GitHub Actions
-        run: npm run publish
+        run: yarn run publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

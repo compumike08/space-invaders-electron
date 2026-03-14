@@ -1,7 +1,7 @@
 {
   "name": "space-invaders-electron",
   "productName": "space-invaders-electron",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Remake of classic space invaders arcade game using Phaser 3 & Electron",
   "main": ".webpack/main",
   "private": true,

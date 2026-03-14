@@ -9,15 +9,6 @@ jobs:
   build-and-lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Set PR Status to pending
-        uses: teamniteo/pull_request_status_action@v1.0.0
-        with:
-          pr_number: ${{ github.event.pull_request.number }}
-          state: pending
-          repository: ${{ github.repository }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          context: "build-and-lint"
-
       - name: Checkout repository code
         uses: actions/checkout@v4
 

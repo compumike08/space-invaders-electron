@@ -37,7 +37,7 @@ export class InstructionsControlsScene extends BaseScene {
       .text(
         0,
         80,
-        "- Press left arrow key to move player ship left\n- Press right arrow key to move player ship right\n- Press spacebar to fire weapon upwards when weapon power bar is green\n- Press 'n' key to fire Nova Blast when special power bar is green\n- Press 't' key to trigger Time Freeze when special power bar is green\n- You will lose a life every time a ufo reaches the bottom of the screen\n- Your score will increase by one every time you destory a ufo",
+        "- Press left arrow key to move player ship left\n- Press right arrow key to move player ship right\n- Press spacebar to fire weapon upwards when weapon power bar is green\n- Press 'n' key to fire Nova Blast when special power bar is green\n- Press 't' key to trigger Time Freeze when special power bar is green\n- Press 'w' key to trigger Weapon Boost when special power bar is green\n- You will lose a life every time a ufo reaches the bottom of the screen\n- Your score will increase by one every time you destory a ufo",
         bodyTextFontConfig
       )
       .setOrigin(0.5);

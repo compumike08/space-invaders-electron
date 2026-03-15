@@ -6,6 +6,7 @@ import { BaseScene } from "../scenes/BaseScene";
 
 const SHIP_VELOCITY = 300;
 const TIME_FREEZE_DURATION = 10000; // time in milliseconds
+const WEAPON_BOOST_DURATION = 20000; // time in milliseconds
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
   cursors: Phaser.Types.Input.Keyboard.CursorKeys;
@@ -24,6 +25,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   specialFireCooldown: number;
   specialPower: number;
   isTimeFrozen: boolean;
+  isWeaponBoostActive: boolean;
 
   constructor(
     scene: BaseScene,
@@ -49,10 +51,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.scene.events.on(Phaser.Scenes.Events.UPDATE, this.update, this);
     this.scene.input.keyboard.on("keydown-N", this.fireNovaBlast.bind(this));
     this.scene.input.keyboard.on("keydown-T", this.fireFreezeTime.bind(this));
+    this.scene.input.keyboard.on("keydown-W", this.fireWeaponBoost.bind(this));
   }
 
   init(scene: BaseScene) {
     this.isTimeFrozen = false;
+    this.isWeaponBoostActive = false;
 
     this.cursors = (
       this.scene.input.keyboard as Phaser.Input.Keyboard.KeyboardPlugin
@@ -77,6 +81,29 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.specialFireTime = 0;
 
     this.setOrigin(0.5, 0.5).setPushable(false).setCollideWorldBounds(true);
+  }
+
+  fireWeaponBoost() {
+    if (this.specialFireTime >= this.specialFireCooldown) {
+      this.specialPower = 0;
+      this.specialFireTime = 0;
+      this.specialPowerBar.setPower(this.specialPower);
+
+      this.weaponPower = this.weaponFireCooldown;
+      this.weaponPowerBar.setPower(this.weaponPower);
+      this.isWeaponBoostActive = true;
+
+      this.scene.time.delayedCall(
+        WEAPON_BOOST_DURATION,
+        this.endWeaponBoost,
+        null,
+        this
+      );
+    }
+  }
+
+  endWeaponBoost() {
+    this.isWeaponBoostActive = false;
   }
 
   fireNovaBlast() {
@@ -149,7 +176,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     this.increaseWeaponPower(delta);
 
-    if (!this.isTimeFrozen) {
+    if (!this.isTimeFrozen && !this.isWeaponBoostActive) {
       this.increaseSpecialPower(delta);
     }
 
@@ -157,7 +184,11 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
     const isSpaceJustDown = Phaser.Input.Keyboard.JustDown(space);
 
-    if (isSpaceJustDown && this.weaponFireTime >= this.weaponFireCooldown) {
+    if (
+      isSpaceJustDown &&
+      (this.isWeaponBoostActive ||
+        this.weaponFireTime >= this.weaponFireCooldown)
+    ) {
       this.fireWeapon();
     }
 
@@ -171,9 +202,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   fireWeapon() {
-    this.weaponFireTime = 0;
-    this.weaponPower = 0;
-    this.weaponPowerBar.setPower(0);
+    if (!this.isWeaponBoostActive) {
+      this.weaponFireTime = 0;
+      this.weaponPower = 0;
+      this.weaponPowerBar.setPower(0);
+    }
+
     this.weaponPulses
       .create(this.getTopCenter().x, this.getTopCenter().y, "weapon-pulse")
       .setOrigin(0.5, 0)

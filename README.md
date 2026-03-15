@@ -19,6 +19,7 @@ Once you start the application, click "Play", then select a difficulty level. Th
 - Press the spacebar to fire your weapon upwards from your ship
 - Press the `n` key to trigger the [Nova Blast](#nova-blast) special ability
 - Press the `t` key to trigger the [Time Freeze](#time-freeze) special ability
+- Press the `w` key top trigger the [Weapon Boost](#weapon-boost) special ability
 
 ### Weapon Power Bar
 
@@ -39,6 +40,12 @@ By pressing the `n` key on the keyboard when the special power bar is full, you 
 By pressing the `t` key on the keyboard when the special power bar is full, you can activate the Time Freeze ability. When activated, all of the ufos on the screen will freeze. You can still move around and fire your weapon to destory the frozen ufos. Time will resume after about 10 seconds.
 
 _NOTE: While time is frozen, the weapon power bar will continue to recharge, but the special power bar will remain at zero until time resumes._
+
+#### Weapon Boost
+
+By pressing the `w` key on the keyboard when the special power bar is full, you can activate the Weapon Boost ability. When activated, you can fire the main weapon as quickly as you can, without waiting for the weapon power bar to recharge. Weapon Boost will last about 20 seconds.
+
+_NOTE: While Weapon Boost is active, the special power bar will remain ad zero until Weapon Boost expires._
 
 ### Lives
 

@@ -1,39 +1,48 @@
 import type { HudBarSize } from "./hud";
 import { BaseScene } from "../game/scenes/BaseScene";
 
-export class SpecialPowerBar {
+export class HudPowerBar {
   bar: Phaser.GameObjects.Graphics;
   x: number;
   y: number;
   value: number;
   size: HudBarSize;
   pixelPerPower: number;
-  specialStatusBarText: Phaser.GameObjects.Text;
-  specialFireCooldown: number;
+  statusBarTextObj: Phaser.GameObjects.Text;
+  statusBarTextValue: string;
+  maxValue: number;
 
-  constructor(scene: BaseScene, x: number, y: number, power: number) {
+  constructor(
+    scene: BaseScene,
+    x: number,
+    y: number,
+    power: number,
+    statusBarTextValue: string,
+    maxValue: number
+  ) {
     this.bar = new Phaser.GameObjects.Graphics(scene);
     this.bar.setDepth(5);
 
     this.x = x;
     this.y = y + 3;
     this.value = power;
-    this.specialFireCooldown = scene.currentDiffLevel.specialFireCooldown;
+    this.maxValue = maxValue;
 
     this.size = {
       width: 80,
       height: 12
     };
 
-    this.pixelPerPower =
-      this.size.width / scene.currentDiffLevel.specialFireCooldown;
+    this.pixelPerPower = this.size.width / this.maxValue;
     scene.add.existing(this.bar);
     this.draw(this.x, this.y);
 
-    this.specialStatusBarText = this.bar.scene.add.text(
+    this.statusBarTextValue = statusBarTextValue;
+
+    this.statusBarTextObj = this.bar.scene.add.text(
       this.x,
       this.y - 3,
-      "Special Power: ",
+      this.statusBarTextValue,
       {
         fontFamily: "Arial Black",
         fontSize: 12,
@@ -43,14 +52,14 @@ export class SpecialPowerBar {
         align: "center"
       }
     );
-    this.specialStatusBarText.setOrigin(0).setDepth(5);
+    this.statusBarTextObj.setOrigin(0).setDepth(5);
   }
 
   setPower(amount: number) {
     if (amount <= 0) {
       this.value = 0;
-    } else if (amount >= this.specialFireCooldown) {
-      this.value = this.specialFireCooldown;
+    } else if (amount >= this.maxValue) {
+      this.value = this.maxValue;
     } else {
       this.value = amount;
     }

@@ -1,7 +1,6 @@
-import { SpecialPowerBar } from "../../hud/SpecialPowerBar";
+import { HudPowerBar } from "../../hud/HudPowerBar";
 import { LivesText } from "../../hud/LivesText";
 import { ScoreText } from "../../hud/ScoreText";
-import { WeaponPowerBar } from "../../hud/WeaponPowerBar";
 import { BaseScene } from "../scenes/BaseScene";
 
 const SHIP_VELOCITY = 300;
@@ -11,9 +10,9 @@ const WEAPON_BOOST_DURATION = 20000; // time in milliseconds
 export class Player extends Phaser.Physics.Arcade.Sprite {
   cursors: Phaser.Types.Input.Keyboard.CursorKeys;
   livesText: LivesText;
-  weaponPowerBar: WeaponPowerBar;
+  weaponPowerBar: HudPowerBar;
   weaponPower: number;
-  specialPowerBar: SpecialPowerBar;
+  specialPowerBar: HudPowerBar;
   weaponPulses: Phaser.Physics.Arcade.Group;
   weaponFireTime: number;
   specialFireTime: number;
@@ -65,8 +64,22 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.weaponPower = this.weaponFireCooldown;
     this.specialPower = 0;
 
-    this.weaponPowerBar = new WeaponPowerBar(scene, 5, 5, this.weaponPower);
-    this.specialPowerBar = new SpecialPowerBar(scene, 5, 25, this.specialPower);
+    this.weaponPowerBar = new HudPowerBar(
+      scene,
+      5,
+      5,
+      this.weaponPower,
+      "Weapon Power: ",
+      scene.currentDiffLevel.weaponFireCooldown
+    );
+    this.specialPowerBar = new HudPowerBar(
+      scene,
+      5,
+      25,
+      this.specialPower,
+      "Special Power: ",
+      scene.currentDiffLevel.specialFireCooldown
+    );
     this.livesText = new LivesText(
       this.scene,
       5,

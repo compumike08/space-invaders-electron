@@ -45,7 +45,7 @@ _NOTE: While time is frozen, the weapon power bar will continue to recharge, but
 
 By pressing the `w` key on the keyboard when the special power bar is full, you can activate the Weapon Boost ability. When activated, you can fire the main weapon as quickly as you can, without waiting for the weapon power bar to recharge. Weapon Boost will last about 20 seconds.
 
-_NOTE: While Weapon Boost is active, the special power bar will remain ad zero until Weapon Boost expires._
+_NOTE: While Weapon Boost is active, the special power bar will remain at zero until Weapon Boost expires._
 
 ### Lives
 
